@@ -9,9 +9,11 @@ const App = () => {
         if (e.which === 13) {
             clearInterval(timer);
             setInputTime(0);
-            let input = Math.floor(document.getElementById("timeCount").value);
-            if (input === "0" || input === "" || input <= 0 || typeof input != "number") return;
+            let input = document.getElementById("timeCount").value;
             input = Number(input);
+            input = Math.floor(input);
+            if (input === "0" || input === "" || input <= 0 || isNaN(input)) return;
+
             // console.log("insude function");
             setInputTime(input);
             timer = setInterval(() => {
