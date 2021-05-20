@@ -10,7 +10,7 @@ const App = () => {
             clearInterval(timer);
             setInputTime(0);
             let input = Math.floor(document.getElementById("timeCount").value);
-            if (input === "0" || input === "") return;
+            if (input === "0" || input === "" || input <= 0 || typeof input != "number") return;
             input = Number(input);
             // console.log("insude function");
             setInputTime(input);
