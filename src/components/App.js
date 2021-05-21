@@ -3,35 +3,36 @@ import "../styles/App.css";
 
 const App = () => {
     // write your code here
-    var timer;
-    const [inputTime, setInputTime] = useState(0);
-    const countDownTimer = (e) => {
-        if (e.which === 13) {
-            clearInterval(timer);
-            setInputTime(0);
-            let input = document.getElementById("timeCount").value;
-            input = Number(input);
-            input = Math.floor(input);
-            if (input === "0" || input === "" || input <= 0 || isNaN(input)) return;
 
-            // console.log("insude function");
-            setInputTime(input);
-            timer = setInterval(() => {
-                console.log("timeron");
+    const [inputTime, setInputTime] = useState(0);
+    const [timerID, settimerID] = useState(0);
+    const countDownTimer = (e) => {
+        if (e.which !== 13) return;
+        clearInterval(timerID);
+        setInputTime(0);
+        let input = document.getElementById("timeCount").value;
+        input = Number(input);
+        input = Math.floor(input);
+        if (input === "0" || input === "" || input <= 0 || isNaN(input)) return;
+
+        setInputTime(input);
+        settimerID(
+            setInterval(() => {
                 setInputTime((prev) => prev - 1);
-            }, 1000);
-        }
+            }, 1000)
+        );
     };
+
     useEffect(() => {
-        if (inputTime <= 0) {
-            clearInterval(timer);
+        if (inputTime < 0) {
+            clearInterval(timerID);
             setInputTime(0);
         }
     }, [inputTime]);
 
     useEffect(() => {
         return () => {
-            clearInterval(timer);
+            clearInterval(timerID);
         };
     }, []);
 
